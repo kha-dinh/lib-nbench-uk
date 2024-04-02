@@ -1,0 +1,25 @@
+From ee53d8f7daa3e7ccb0a95463b9ae55a4ec70e723 Mon Sep 17 00:00:00 2001
+From: Kha Dinh <dalo2903@gmail.com>
+Date: Fri, 15 Mar 2024 11:52:19 +0900
+Subject: [PATCH 4/4] Return 0 instead of exit
+
+---
+ nbench0.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/nbench0.c b/nbench0.c
+index 76e9686..24cec64 100644
+--- a/nbench0.c
++++ b/nbench0.c
+@@ -369,7 +369,7 @@ if(global_custrun==0)
+ output_string("* Trademarks are property of their respective holder.\n");
+ }
+
+-exit(0);
++return 0;
+ }
+
+ /**************
+--
+2.43.0
+

@@ -1,0 +1,54 @@
+menuconfig LIBNBENCH
+	bool "libnbench -  Linux/Unix nbench (previously known as BYTE's Native Mode Benchmarks)"
+	default n
+	select LIBMUSL
+
+if LIBNBENCH
+config LIBNBENCH_MAIN_FUNCTION
+	bool "Provide main function"
+	default y
+
+config LIBNBENCH_MAIN_FUNCTION
+	bool "Provide main function"
+	default y
+
+config LIBNBENCH_ENABLE_NUMSORT
+	bool "Enable NumSort benchmark"
+	default y
+
+config LIBNBENCH_ENABLE_SSORT
+	bool "Enable StringSort benchmark"
+	default y
+
+config LIBNBENCH_ENABLE_BTIOP
+	bool "Enable BitOp benchmark"
+	default y
+
+config LIBNBENCH_ENABLE_FPEMU
+	bool "Enable FP Emulation benchmark"
+	default y
+
+config LIBNBENCH_ENABLE_FFPU
+	bool "Enable Fourier benchmark"
+	default y
+
+config LIBNBENCH_ENABLE_ASIGN
+	bool "Enable Assignment benchmark"
+	default y
+
+config LIBNBENCH_ENABLE_IDEA
+	bool "Enable IDEA Encyption benchmark"
+	default y
+
+config LIBNBENCH_ENABLE_HUFF
+	bool "Enable Huffman Compression benchmark"
+	default y
+
+config LIBNBENCH_ENABLE_NNET
+	bool "Enable Neural net benchmark"
+	default y
+
+config LIBNBENCH_ENABLE_LU
+	bool "Enable LU benchmark"
+	default y
+endif

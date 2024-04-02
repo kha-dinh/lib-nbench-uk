@@ -1,0 +1,66 @@
+#  libnbench: Makefile.uk
+################################################################################
+# Library registration
+################################################################################
+$(eval $(call addlib_s,libnbench,$(CONFIG_LIBNBENCH)))
+
+################################################################################
+# Sources
+################################################################################
+LIBNBENCH_VERSION = 2.2.3
+LIBNBENCH_URL = http://www.math.utah.edu/~mayer/linux/nbench-byte-$(LIBNBENCH_VERSION).tar.gz
+
+LIBNBENCH_PATCHDIR = $(LIBNBENCH_BASE)/patches
+
+$(eval $(call fetch,libnbench,$(LIBNBENCH_URL)))
+$(eval $(call patch,libnbench,$(LIBNBENCH_PATCHDIR),nbench-byte-$(LIBNBENCH_VERSION)))
+
+################################################################################
+# Helpers
+################################################################################
+LIBNBENCH_EXTRACTED = $(LIBNBENCH_ORIGIN)/nbench-byte-$(LIBNBENCH_VERSION)
+
+################################################################################
+# Library includes
+################################################################################
+LIBNBENCH_CINCLUDES-y += -I$(LIBNBENCH_EXTRACTED) -I$(LIBNBENCH_BASE)
+
+################################################################################
+# Library flags
+################################################################################
+LIBNBENCH_CFLAGS-y += -DLINUX
+
+################################################################################
+# Core
+################################################################################
+LIBNBENCH_SRCS-y += $(LIBNBENCH_BASE)/clock.c|unikraft
+LIBNBENCH_SRCS-$(CONFIG_LIBNBENCH_MAIN_FUNCTION) += $(LIBNBENCH_BASE)/main.c|unikraft
+
+LIBNBENCH_SRCS-y += $(LIBNBENCH_EXTRACTED)/hardware.c
+LIBNBENCH_SRCS-y += $(LIBNBENCH_EXTRACTED)/nbench0.c
+LIBNBENCH_SRCS-y += $(LIBNBENCH_EXTRACTED)/emfloat.c
+LIBNBENCH_SRCS-y += $(LIBNBENCH_EXTRACTED)/misc.c
+LIBNBENCH_SRCS-y += $(LIBNBENCH_EXTRACTED)/nbench1.c
+LIBNBENCH_SRCS-y += $(LIBNBENCH_EXTRACTED)/sysspec.c
+
+################################################################################
+# Prepare
+################################################################################
+
+$(LIBNBENCH_BUILD)/pointer.h: $(LIBNBENCH_BUILD)/.origin
+	$(call verbose_cmd,PREPARE,libnbench:  $(notdir $@), \
+				cd $(LIBNBENCH_EXTRACTED) && \
+				make pointer.h && $(TOUCH) $@)
+UK_PREPARE += $(LIBNBENCH_BUILD)/pointer.h
+
+$(LIBNBENCH_BUILD)/sysinfo.c: $(LIBNBENCH_BUILD)/.origin
+	$(call verbose_cmd,PREPARE,libnbench:  $(notdir $@), \
+				cd $(LIBNBENCH_EXTRACTED) && \
+				make sysinfo.c && $(TOUCH) $@)
+UK_PREPARE += $(LIBNBENCH_BUILD)/sysinfo.c
+
+$(LIBNBENCH_BUILD)/sysinfoc.c: $(LIBNBENCH_BUILD)/.origin
+	$(call verbose_cmd,PREPARE,libnbench:  $(notdir $@), \
+				cd $(LIBNBENCH_EXTRACTED) && \
+				make sysinfoc.c && $(TOUCH) $@)
+UK_PREPARE += $(LIBNBENCH_BUILD)/sysinfoc.c

@@ -1,0 +1,71 @@
+From eb9ee869b7d94066ec0cac1452dc66d6a1f043e2 Mon Sep 17 00:00:00 2001
+From: Kha Dinh <dalo2903@gmail.com>
+Date: Fri, 15 Mar 2024 11:51:59 +0900
+Subject: [PATCH 3/4] Add configs to control which test is used
+
+---
+ nbench0.c | 41 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 41 insertions(+)
+
+diff --git a/nbench0.c b/nbench0.c
+index 7d13496..76e9686 100644
+--- a/nbench0.c
++++ b/nbench0.c
+@@ -54,6 +54,7 @@
+ #include "nmglobal.h"
+ #include "nbench0.h"
+ #include "hardware.h"
++#include <uk/config.h>
+
+ /*************
+ **** main ****
+@@ -237,6 +237,46 @@ output_string("                    :                  : Pentium 90* : AMD K6/233
+ output_string("--------------------:------------------:-------------:------------\n");
+ #endif
+
++#if !CONFIG_LIBNBENCH_ENABLE_NUMSORT
++tests_to_do[TF_NUMSORT] = 0;
++#endif
++
++#if !CONFIG_LIBNBENCH_ENABLE_SSORT
++tests_to_do[TF_SSORT] = 0;
++#endif
++
++#if !CONFIG_LIBNBENCH_ENABLE_BITOP
++tests_to_do[TF_BITOP] = 0;
++#endif
++
++#if !CONFIG_LIBNBENCH_ENABLE_FPEMU
++tests_to_do[TF_FPEMU] = 0;
++#endif
++
++#if !CONFIG_LIBNBENCH_ENABLE_FFPU
++tests_to_do[TF_FFPU] = 0;
++#endif
++
++#if !CONFIG_LIBNBENCH_ENABLE_ASSIGN
++tests_to_do[TF_ASSIGN] = 0;
++#endif
++
++#if !CONFIG_LIBNBENCH_ENABLE_IDEA
++tests_to_do[TF_IDEA] = 0;
++#endif
++
++#if !CONFIG_LIBNBENCH_ENABLE_HUFF
++tests_to_do[TF_HUFF] = 0;
++#endif
++
++#if !CONFIG_LIBNBENCH_ENABLE_NNET
++tests_to_do[TF_NNET] = 0;
++#endif
++
++#if !CONFIG_LIBNBENCH_ENABLE_LU
++tests_to_do[TF_LU] = 0;
++#endif
++
+ for(i=0;i<NUMTESTS;i++)
+ {
+         if(tests_to_do[i])
+--
+2.43.0
+

@@ -1,0 +1,28 @@
+From 67bd44b5b1a284b23521899f4bc0ff146b12271d Mon Sep 17 00:00:00 2001
+From: Kha Dinh <dalo2903@gmail.com>
+Date: Thu, 21 Dec 2023 13:10:07 +0900
+Subject: [PATCH 2/4] Rename main function
+
+---
+ nbench0.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/nbench0.c b/nbench0.c
+index 784b501..7d13496 100644
+--- a/nbench0.c
++++ b/nbench0.c
+@@ -59,9 +59,9 @@
+ **** main ****
+ *************/
+ #ifdef MAC
+-void main(void)
++void nbench_main(void)
+ #else
+-int main(int argc, char *argv[])
++int nbench_main(int argc, char *argv[])
+ #endif
+ {
+ int i;                  /* Index */
+--
+2.43.0
+
